@@ -1,5 +1,6 @@
+import { useRef } from "react";
 
-export const Form = ({ setInput, addtextclick ,settype,clear}) => {
+export const Form = ({ setInput, addtextclick ,settype,clear,titleRef}) => {
   
   return (
     <>
@@ -7,7 +8,7 @@ export const Form = ({ setInput, addtextclick ,settype,clear}) => {
         <h2>Add a New Todo</h2>
         <div className="form-group">
           <label htmlFor="title">Title</label>
-          <input id="title" placeholder="What do you need to do?" type="text" onChange={(e) => setInput(e.target.value)} />
+          <input id="title" placeholder="What do you need to do?" type="text" ref={titleRef} onChange={(e) => setInput(e.target.value)} />
           <label htmlFor="priority">Priority</label>
           <select name="dsa" id="priority" onChange={(e) => settype(e.target.value)}>
             <option value="low">low</option>

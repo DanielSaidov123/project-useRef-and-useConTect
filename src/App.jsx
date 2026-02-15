@@ -8,7 +8,8 @@ function App() {
   const Todos = useContext(TodoList);
   const [text, setInput] = useState("");
   const [type, settype] = useState("Low");
-
+  const titleRef = useRef();
+  
   function addtextclick(e) {
     e.preventDefault();
     Todos.setTodos((prev) => [
@@ -16,18 +17,26 @@ function App() {
       { id: Date.now(), title: text, type: type },
     ]);
   }
-   const textref = useRef();
   function deleteed(id) {
-      Todos.setTodos(Todos.todos.filter((todo) => todo.id !== id))
+    Todos.setTodos(Todos.todos.filter((todo) => todo.id !== id));
   }
-  function clear( ) {
-     setInput("")
-  }
+  const clear = () => {
+    if (titleRef.current) {
+      titleRef.current.value = "";
+      titleRef.current.focus();
+    }
+  };
   return (
     <>
       <Nav />
-      <Form setInput={setInput} addtextclick={addtextclick} settype={settype} clear={clear}/>
-      { Todos.todos.map((t) => (
+      <Form
+        setInput={setInput}
+        addtextclick={addtextclick}
+        settype={settype}
+        clear={clear}
+        titleRef={titleRef}
+      />
+      {Todos.todos.map((t) => (
         <AllTodo
           title={t.title}
           id={t.id}
