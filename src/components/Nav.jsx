@@ -2,12 +2,19 @@ import React, { useContext } from "react";
 import { TodoList } from "../Contexts/TodoContext";
 
 export const Nav = () => {
-  const Todos = useContext(TodoList)
+  const Todos = useContext(TodoList);
+
   return (
-    <nav className="navbar">
+    <nav className="navbar light">
       <h1>Todo App</h1>
-        <p>Total Todos: {Todos.todos.length}</p>
-        <button>Dark Mode</button>
+
+      <div className="navbar-right">
+        <span className="todo-count">
+          Total Todos: {Todos.todos.length}
+        </span>
+
+        <button className="theme-btn">Dark Mode</button>
+      </div>
     </nav>
   );
 };
