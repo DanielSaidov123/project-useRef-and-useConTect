@@ -4,22 +4,25 @@ import { Nav } from "./components/Nav";
 import { Form } from "./components/Form";
 import { AllTodo } from "./components/AllTodo";
 import { TodoList } from "./Contexts/TodoContext";
+import { Posts } from "./components/Posts";
 function App() {
   const Todos = useContext(TodoList);
   const [text, setInput] = useState("");
   const [type, settype] = useState("low");
   const titleRef = useRef();
+  const [bool, setbool] = useState(false);
+  const [light, setlight] = useState(false);
 
+  function lightset() {
+    console.log(light);
+    setlight(!light);
+  }
   function addtextclick(e) {
     e.preventDefault();
-    Todos.setTodos(prev => [
+    Todos.setTodos((prev) => [
       ...prev,
-      { id: Date.now(), title: text, type: type }
+      { id: Date.now(), title: text, type: type },
     ]);
-  }
-
-  function deleteed(id) {
-    Todos.setTodos(Todos.todos.filter(todo => todo.id !== id));
   }
 
   const clear = () => {
@@ -28,32 +31,32 @@ function App() {
       titleRef.current.focus();
     }
   };
-
+  function togelbool() {
+    setbool(!bool);
+    console.log(bool);
+  }
   return (
-    <div className="app light">
-      <Nav />
+    <div className={`app ${!light && "light" } ${light && "dark"}`}>
+      <Nav togelbool={togelbool} bool={bool}  light={light } lightset={lightset}/>
+      {!bool ? (
+        <main className="main-content">
+          <Form
+            setInput={setInput}
+            addtextclick={addtextclick}
+            settype={settype}
+            clear={clear}
+            titleRef={titleRef}
+          />
 
-      <main className="main-content">
-        <Form
-          setInput={setInput}
-          addtextclick={addtextclick}
-          settype={settype}
-          clear={clear}
-          titleRef={titleRef}
-        />
-
-        <div className="todo-list">
-          {Todos.todos.map(t => (
-            <AllTodo
-              title={t.title}
-              id={t.id}
-              key={t.id}
-              type={t.type}
-              deleteed={deleteed}
-            />
-          ))}
-        </div>
-      </main>
+          <div className="todo-list">
+            {Todos.todos.map((t) => (
+              <AllTodo title={t.title} id={t.id} key={t.id} type={t.type} />
+            ))}
+          </div>
+        </main>
+      ) : (
+        <Posts />
+      )}
     </div>
   );
 }

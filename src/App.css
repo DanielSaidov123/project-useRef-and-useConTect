@@ -144,4 +144,11 @@
   color: white;
   cursor: pointer;
 }
-  
+
+.postdiv{
+  border-left: 5px solid purple;
+  border-radius: 10px; 
+  text-align: center;
+  margin: 0 20% 2% 20% ;
+  background-color: white;
+}
