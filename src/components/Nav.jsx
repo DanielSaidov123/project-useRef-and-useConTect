@@ -18,7 +18,7 @@ export const Nav = ({ light,lightset}) => {
         
         <button onClick={lightset} className="theme-btn">Dark Mode</button>
         <div className="links">
-          <NavLink to="/todos" className="link">
+          <NavLink to="/" className="link">
             totos
           </NavLink>
           <NavLink to="/posts" className="link">

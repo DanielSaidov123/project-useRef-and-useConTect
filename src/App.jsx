@@ -6,6 +6,7 @@ import { AllTodo } from "./components/AllTodo";
 import { TodoList } from "./Contexts/TodoContext";
 import { Posts } from "./components/Posts";
 import { Route , Routes } from "react-router";
+import TodoPage from "./components/TodoPage";
 function App() {
   const Todos = useContext(TodoList);
   const [text, setInput] = useState("");
@@ -37,7 +38,7 @@ function App() {
     <div className={`app ${!light && "light" } ${light && "dark"}`}>
       <Nav   light={light } lightset={lightset}/>
       <Routes>
-         <Route path="/todos" element={<main className="main-content">
+         <Route path="/" element={<main className="main-content">
           <Form
             setInput={setInput}
             addtextclick={addtextclick}
@@ -53,6 +54,8 @@ function App() {
           </div>
         </main>} />
          <Route path="/posts" element={<Posts />} />
+        <Route path="/todos/:id" element={<TodoPage />} />
+
       </Routes>
     </div>
   );
