@@ -1,9 +1,10 @@
 import  { useContext, useState } from "react";
 import { TodoList } from "../Contexts/TodoContext";
+import { NavLink } from "react-router";
 
-export const Nav = ({togelbool ,bool,light,lightset}) => {
+
+export const Nav = ({ light,lightset}) => {
   const Todos = useContext(TodoList);
-
 
 
   return (
@@ -14,8 +15,17 @@ export const Nav = ({togelbool ,bool,light,lightset}) => {
         <span className="todo-count">
           Total Todos: {Todos.todos.length}
         </span>
-        <button onClick={togelbool} className="theme-btn">{!bool?"Posts":"Todos"}</button>
+        
         <button onClick={lightset} className="theme-btn">Dark Mode</button>
+        <div className="links">
+          <NavLink to="/todos" className="link">
+            totos
+          </NavLink>
+          <NavLink to="/posts" className="link">
+            posts
+          </NavLink>
+          
+        </div>
       </div>
     </nav>
   );
